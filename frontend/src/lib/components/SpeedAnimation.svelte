@@ -7,7 +7,7 @@
 	let animationFrame: any = $state();
 	let isRunning = $state(false);
 	let progress = $state(0);
-	let phase = $state('complete');
+	let phase = $state('idle');
 	let speedTestResult: any = $state(undefined);
 
 	// Configuration for the animation
