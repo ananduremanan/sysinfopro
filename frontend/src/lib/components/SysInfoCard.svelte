@@ -1,37 +1,33 @@
 <script lang="ts">
+	import { checkInternetConnection, copyStat, mbToGb } from '$lib';
 	import CpuStats from './CpuStats.svelte';
 	import RamStats from './RamStats.svelte';
 	import SpeedAnimation from './SpeedAnimation.svelte';
 
 	let { systemInfo, showSpeedTest = $bindable() } = $props();
 
-	let statCopyStatus = $state<string | undefined>(undefined);
+	let logMessage = $state<string | undefined>(undefined);
 
-	function mbToGb(mb: number) {
-		return (mb / 1024).toFixed(2);
-	}
+	async function getInternetSpeed() {
+		const isConnected = await checkInternetConnection();
 
-	function getInternetSpeed() {
+		if (!isConnected) {
+			logMessage = 'No internet connection detected!';
+			setTimeout(() => {
+				logMessage = undefined;
+			}, 2000);
+			return;
+		}
+
 		showSpeedTest = !showSpeedTest;
 	}
 
-	function copyStat() {
-		const stats = JSON.stringify(systemInfo, null, 2);
+	async function copyStatHandler() {
+		logMessage = await copyStat(systemInfo);
 
-		navigator.clipboard
-			.writeText(stats)
-			.then(() => {
-				statCopyStatus = 'Stats copied to clipboard!';
-				setTimeout(() => {
-					statCopyStatus = undefined;
-				}, 2000);
-			})
-			.catch((err) => {
-				statCopyStatus = `Failed to copy: ${err}`;
-				setTimeout(() => {
-					statCopyStatus = undefined;
-				}, 2000);
-			});
+		setTimeout(() => {
+			logMessage = undefined;
+		}, 2000);
 	}
 </script>
 
@@ -76,20 +72,18 @@
 				<div class="text-xs self-end mt-6">
 					<button
 						class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
-						onclick={copyStat}>Copy Stat</button
+						onclick={copyStatHandler}>Copy Stat</button
 					>
 					<button
 						class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
 						onclick={getInternetSpeed}>Check Internet Speed</button
 					>
-					{#if statCopyStatus}
-						<div
-							class=" {statCopyStatus === 'Stats copied to clipboard!'
-								? 'text-green-500'
-								: 'text-red-500'} text-xs mt-2 absolute"
-						>
-							{statCopyStatus}
-						</div>
+					{#if logMessage}
+						{#if logMessage === 'Stats copied to clipboard!'}
+							<div class="text-xs mt-2 absolute text-green-500">{logMessage}</div>
+						{:else}
+							<div class="text-red-500 mt-2 absolute">{logMessage}</div>
+						{/if}
 					{/if}
 				</div>
 			</div>

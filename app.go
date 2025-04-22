@@ -67,3 +67,7 @@ func (a *App) GetCPUStats() (*functions.CPUStats, error) {
 func (a *App) GetMemoryStats() (*functions.MemoryStats, error) {
 	return functions.GetMemoryStats()
 }
+
+func (a *App) CheckInternetConnection() bool {
+	return functions.IsConnectedToInternet()
+}
