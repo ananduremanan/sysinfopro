@@ -10,8 +10,6 @@
 	let phase = $state('idle');
 	let speedTestResult: any = $state(undefined);
 
-	let { getInternetSpeed } = $props();
-
 	// Configuration for the animation
 	let animationConfig = $state({
 		download: {
@@ -154,7 +152,7 @@
 
 <!-- Speedometer -->
 {#if phase === 'complete'}
-	<div class="flex flex-col items-center justify-center gap-6">
+	<div class="flex flex-col items-center justify-center gap-6 mt-20">
 		<div class="flex gap-4">
 			<div class="flex mb-2">
 				<div class="font-medium text-6xl">
@@ -255,12 +253,6 @@
 				</div>
 
 				<div>
-					<button
-						onclick={getInternetSpeed}
-						class="px-4 py-2 bg-gray-500 text-white font-medium rounded-lg text-sm cursor-pointer"
-					>
-						Back
-					</button>
 					<button
 						onclick={startTest}
 						class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"

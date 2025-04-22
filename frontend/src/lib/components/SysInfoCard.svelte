@@ -18,8 +18,9 @@
 	class="bg-slate-200 dark:bg-slate-900 dark:text-white p-6 rounded-2xl flex flex-col w-[95vw] h-[80vh]"
 >
 	{#if showSpeedTest}
-		<div class="">
-			<SpeedAnimation {getInternetSpeed} />
+		<div>
+			<button class="float-right -mt-2 cursor-pointer" onclick={getInternetSpeed}>Back</button>
+			<SpeedAnimation />
 		</div>
 	{:else}
 		<div class="grid grid-cols-2 items-center">
@@ -51,7 +52,7 @@
 					<p>Network Status: <span class="font-bold">{systemInfo.network_status}</span></p>
 				</div>
 
-				<div class="text-xs float-right mt-6">
+				<div class="text-xs self-end mt-6">
 					<button class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
 						>Copy Stat</button
 					>
