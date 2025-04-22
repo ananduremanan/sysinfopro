@@ -1,15 +1,15 @@
 {
-	"fixed": {
-		"file_version": "{{.Info.ProductVersion}}"
-	},
-	"info": {
-		"0000": {
-			"ProductVersion": "{{.Info.ProductVersion}}",
-			"CompanyName": "{{.Info.CompanyName}}",
-			"FileDescription": "{{.Info.ProductName}}",
-			"LegalCopyright": "{{.Info.Copyright}}",
-			"ProductName": "{{.Info.ProductName}}",
-			"Comments": "{{.Info.Comments}}"
-		}
-	}
+  "fixed": {
+    "file_version": "{{.Info.ProductVersion}}"
+  },
+  "info": {
+    "0000": {
+      "ProductVersion": "0.0.1",
+      "CompanyName": "nada labs",
+      "FileDescription": "SysInfo Pro",
+      "LegalCopyright": "{{.Info.Copyright}}",
+      "ProductName": "SysInfo Pro",
+      "Comments": "SysInfo Pro is a system information tool for Windows."
+    }
+  }
 }

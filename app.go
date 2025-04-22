@@ -22,6 +22,8 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+	functions.StartCPUMonitoring(ctx)
+	functions.StartMemoryMonitoring(ctx)
 }
 
 // Greet returns a greeting for the given name
@@ -56,4 +58,12 @@ func (a *App) GetInterNetSpeed() (string, error) {
 	}
 
 	return string(jsonBytes), nil
+}
+
+func (a *App) GetCPUStats() (*functions.CPUStats, error) {
+	return functions.GetCPUStats()
+}
+
+func (a *App) GetMemoryStats() (*functions.MemoryStats, error) {
+	return functions.GetMemoryStats()
 }

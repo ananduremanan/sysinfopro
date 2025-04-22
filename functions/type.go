@@ -21,3 +21,11 @@ type InternetSpeedStat struct {
 	DownloadSpeed float64 `json:"download_speed"`
 	UploadSpeed   float64 `json:"upload_speed"`
 }
+
+type MemoryStats struct {
+	TotalRAMMB   uint64  `json:"totalRAMMB"`
+	FreeRAMMB    uint64  `json:"freeRAMMB"`
+	UsedRAMMB    uint64  `json:"usedRAMMB"`
+	UsagePercent float64 `json:"usagePercent"`
+	Timestamp    int64   `json:"timestamp"`
+}

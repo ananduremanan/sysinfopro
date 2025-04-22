@@ -171,7 +171,7 @@
 		{:else}
 			<div class="relative w-64 h-64 mx-auto mb-4">
 				<!-- Speed gauge background -->
-				<div class="absolute inset-0 rounded-full border-8 border-gray-200"></div>
+				<!-- <div class="absolute inset-0 rounded-full border-8 border-gray-200"></div> -->
 
 				<!-- Speed markings -->
 				<div class="absolute inset-0">
@@ -191,13 +191,13 @@
 					class="absolute text-xs text-gray-600"
 					style="left: 50%; top: 15%; transform: translateX(-50%);"
 				>
-					{phase === 'upload' ? '50' : '100'}
+					{phase === 'upload' ? '50' : '50'}
 				</div>
 				<div class="absolute text-xs text-gray-600" style="right: 25%; top: 30%;">
-					{phase === 'upload' ? '75' : '150'}
+					{phase === 'upload' ? '75' : '75'}
 				</div>
 				<div class="absolute text-xs text-gray-600" style="right: 15%; top: 70%;">
-					{phase === 'upload' ? '100' : '200'}
+					{phase === 'upload' ? '100' : '100'}
 				</div>
 
 				<!-- Speed needle -->
