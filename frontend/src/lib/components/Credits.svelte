@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Modal from '$lib/components/Modal.svelte';
+	import { BrowserOpenURL } from '$lib/wailsjs/runtime/runtime';
 
 	let showModal = $state(false);
 	let modalTitle: string | undefined = $state(undefined);
@@ -17,7 +18,12 @@
 	<button class="hover:dark:text-slate-400 cursor-pointer" onclick={() => setModal('Credits')}
 		>Credits</button
 	>
-	<button class="hover:dark:text-slate-400 cursor-pointer">Source</button>
+	<button
+		class="hover:dark:text-slate-400 cursor-pointer"
+		onclick={() => {
+			BrowserOpenURL('https://github.com/ananduremanan/sysinfopro');
+		}}>Source</button
+	>
 </div>
 
 <Modal bind:showModal>

@@ -3,6 +3,7 @@
 	import RefreshButton from '$lib/components/RefreshButton.svelte';
 	import SysInfoCard from '$lib/components/SysInfoCard.svelte';
 	import { GetSysInfo } from '$lib/wailsjs/go/main/App';
+	import { Quit } from '$lib/wailsjs/runtime/runtime';
 
 	let systemInfo = $state(undefined);
 	let error = $state('');
@@ -32,9 +33,13 @@
 			<div class="flex dark:text-white">
 				<img src="/logo.svg" alt="logo" class="w-full h-10" />™
 			</div>
-			{#if !showSpeedTest}
-				<RefreshButton onclick={getSysInfo} />
-			{/if}
+			<div class="flex space-x-6 items-center">
+				{#if !showSpeedTest}
+					<RefreshButton onclick={getSysInfo} />
+				{/if}
+				<button class="dark:text-slate-400 cursor-pointer text-sm mr-2" onclick={Quit}>Close</button
+				>
+			</div>
 		</div>
 
 		{#if systemInfo}

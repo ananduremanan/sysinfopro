@@ -10,6 +10,8 @@
 	let phase = $state('idle');
 	let speedTestResult: any = $state(undefined);
 
+	let { getInternetSpeed } = $props();
+
 	// Configuration for the animation
 	let animationConfig = $state({
 		download: {
@@ -150,29 +152,35 @@
 	});
 </script>
 
-<div class="flex flex-col items-center justify-center">
-	<div class="rounded-xl w-full p-6 flex flex-col items-center justify-center">
-		<!-- Speedometer -->
-		{#if phase === 'complete'}
-			<div class="grid grid-cols-2 space-x-8 mb-8">
-				<div class="flex mb-2">
-					<div class="font-medium text-6xl">
-						{animationConfig.download.finalSpeed.toFixed(1)}<span class="text-sm">Mbps</span>
-						<div class="text-sm text-gray-400">Download Speed</div>
-					</div>
-				</div>
-				<div class="flex">
-					<div class="font-medium text-6xl">
-						{animationConfig.upload.finalSpeed.toFixed(1)}<span class="text-sm">Mbps</span>
-						<div class="text-sm text-gray-400">Upload Speed</div>
-					</div>
+<!-- Speedometer -->
+{#if phase === 'complete'}
+	<div class="flex flex-col items-center justify-center gap-6">
+		<div class="flex gap-4">
+			<div class="flex mb-2">
+				<div class="font-medium text-6xl">
+					{animationConfig.download.finalSpeed.toFixed(1)}<span class="text-sm">Mbps</span>
+					<div class="text-sm text-gray-400">Download Speed</div>
 				</div>
 			</div>
-		{:else}
-			<div class="relative w-64 h-64 mx-auto mb-4">
-				<!-- Speed gauge background -->
-				<!-- <div class="absolute inset-0 rounded-full border-8 border-gray-200"></div> -->
+			<div class="flex">
+				<div class="font-medium text-6xl">
+					{animationConfig.upload.finalSpeed.toFixed(1)}<span class="text-sm">Mbps</span>
+					<div class="text-sm text-gray-400">Upload Speed</div>
+				</div>
+			</div>
+		</div>
 
+		<button
+			onclick={startTest}
+			class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"
+		>
+			{phase === 'complete' ? 'Test Again' : 'Start Test'}
+		</button>
+	</div>
+{:else}
+	<div class="grid grid-cols-2">
+		<div class="flex flex-col items-center justify-center">
+			<div class="relative w-64 h-64 mx-auto mb-4">
 				<!-- Speed markings -->
 				<div class="absolute inset-0">
 					{#each Array(11) as _, i}
@@ -219,30 +227,47 @@
 					</div>
 				</div>
 			</div>
-		{/if}
 
-		<!-- Status -->
-		<div class="text-center text-gray-600 mb-4 text-sm">
-			{#if phase === 'idle'}
-				Ready to test your connection speed
-			{:else if phase === 'download'}
-				Testing download speed...
-			{:else if phase === 'upload'}
-				Testing upload speed...
-			{:else}
-				Test completed!
-			{/if}
+			<!-- Status -->
+			<div class="text-center text-gray-600 mb-4 text-sm">
+				{#if phase === 'idle'}
+					Ready to test your connection speed
+				{:else if phase === 'download'}
+					Testing download speed...
+				{:else if phase === 'upload'}
+					Testing upload speed...
+				{:else}
+					Test completed!
+				{/if}
+			</div>
 		</div>
 
 		<!-- Action button -->
-		<div class="flex justify-center">
+		<div class="flex flex-col justify-center items-end gap-4">
 			{#if phase === 'idle' || phase === 'complete'}
-				<button
-					onclick={startTest}
-					class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"
-				>
-					{phase === 'complete' ? 'Test Again' : 'Start Test'}
-				</button>
+				<div class="text-xs text-justify">
+					Test your internet speed in less than 30 seconds. The test typically uses between 40 to
+					100 MB of data, though faster connections may use more. <br /> <br /> To perform the test,
+					you'll be connected to Cloudflare. Your IP address will be shared with and processed by them
+					according to their privacy policy. Cloudflare manages the test and makes all results publicly
+					available to support internet research. These results include your IP address and speed data,
+					but no personal information about you as a user is included.
+				</div>
+
+				<div>
+					<button
+						onclick={getInternetSpeed}
+						class="px-4 py-2 bg-gray-500 text-white font-medium rounded-lg text-sm cursor-pointer"
+					>
+						Back
+					</button>
+					<button
+						onclick={startTest}
+						class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"
+					>
+						{phase === 'complete' ? 'Test Again' : 'Start Test'}
+					</button>
+				</div>
 			{:else}
 				<button
 					onclick={resetTest}
@@ -253,4 +278,4 @@
 			{/if}
 		</div>
 	</div>
-</div>
+{/if}

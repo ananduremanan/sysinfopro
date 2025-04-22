@@ -18,8 +18,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "SysInfo Pro",
-		Width:  1024,
-		Height: 768,
+		Width:  768,
+		Height: 460,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
@@ -28,6 +28,11 @@ func main() {
 		Bind: []interface{}{
 			app,
 		},
+		Frameless:       true,
+		CSSDragProperty: "widows",
+		CSSDragValue:    "1",
+		Fullscreen:      false,
+		DisableResize:   true,
 	})
 
 	if err != nil {

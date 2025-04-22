@@ -4,8 +4,8 @@
 
 <button
 	aria-label="Refresh"
-	class="mr-4 flex items-end gap-2 text-sm dark:text-slate-400 cursor-pointer"
-    onclick={onclick}
+	class="flex items-end gap-2 text-sm dark:text-slate-400 cursor-pointer"
+	{onclick}
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

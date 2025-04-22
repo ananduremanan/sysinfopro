@@ -14,11 +14,12 @@
 	}
 </script>
 
-<div class="bg-slate-200 dark:bg-slate-900 dark:text-white p-6 rounded-2xl flex flex-col items-end">
+<div
+	class="bg-slate-200 dark:bg-slate-900 dark:text-white p-6 rounded-2xl flex flex-col w-[95vw] h-[80vh]"
+>
 	{#if showSpeedTest}
-		<div class="mt-6 w-[50vw]">
-			<button class="float-right -mt-8 cursor-pointer" onclick={getInternetSpeed}>Back</button>
-			<SpeedAnimation />
+		<div class="">
+			<SpeedAnimation {getInternetSpeed} />
 		</div>
 	{:else}
 		<div class="grid grid-cols-2 items-center">
@@ -44,7 +45,6 @@
 					<p>
 						Installed Memory: <span class="font-bold">{mbToGb(systemInfo.total_ram_mb)} GB</span>
 					</p>
-					<p>Free Memory: <span class="font-bold">{mbToGb(systemInfo.free_ram_mb)} GB</span></p>
 					<p>Disk Type: <span class="font-bold">{systemInfo.disk_type}</span></p>
 					<p>Total Disk Space: <span class="font-bold">{systemInfo.total_disk_gb} GB</span></p>
 					<p>Available Disk Space: <span class="font-bold">{systemInfo.free_disk_gb} GB</span></p>
