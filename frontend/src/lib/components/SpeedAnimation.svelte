@@ -240,34 +240,36 @@
 			</div>
 		</div>
 
-		<!-- Action button -->
 		<div class="flex flex-col justify-center items-end gap-4">
-			{#if phase === 'idle' || phase === 'complete'}
-				<div class="text-xs text-justify">
-					Test your internet speed in less than 30 seconds. The test typically uses between 40 to
-					100 MB of data, though faster connections may use more. <br /> <br /> To perform the test,
-					you'll be connected to Cloudflare. Your IP address will be shared with and processed by them
-					according to their privacy policy. Cloudflare manages the test and makes all results publicly
-					available to support internet research. These results include your IP address and speed data,
-					but no personal information about you as a user is included.
-				</div>
+			<div class="text-xs text-justify">
+				Test your internet speed in less than 30 seconds. The test typically uses between 40 to 100
+				MB of data, though faster connections may use more. <br /> <br /> To perform the test, you'll
+				be connected to Cloudflare. Your IP address will be shared with and processed by them according
+				to their privacy policy. Cloudflare manages the test and makes all results publicly available
+				to support internet research. These results include your IP address and speed data, but no personal
+				information about you as a user is included.
+			</div>
 
-				<div>
+			<!-- Action button -->
+			<div class="">
+				{#if phase === 'idle' || phase === 'complete'}
+					<div>
+						<button
+							onclick={startTest}
+							class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"
+						>
+							{phase === 'complete' ? 'Test Again' : 'Start Test'}
+						</button>
+					</div>
+				{:else}
 					<button
-						onclick={startTest}
-						class="px-4 text-sm py-2 bg-blue-500 text-white font-medium rounded-lg cursor-pointer"
+						onclick={resetTest}
+						class="px-4 py-2 bg-gray-500 text-white font-medium rounded-lg text-sm cursor-pointer"
 					>
-						{phase === 'complete' ? 'Test Again' : 'Start Test'}
+						Cancel
 					</button>
-				</div>
-			{:else}
-				<button
-					onclick={resetTest}
-					class="px-4 py-2 bg-gray-500 text-white font-medium rounded-lg text-sm cursor-pointer"
-				>
-					Cancel
-				</button>
-			{/if}
+				{/if}
+			</div>
 		</div>
 	</div>
 {/if}

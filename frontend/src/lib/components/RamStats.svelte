@@ -64,7 +64,7 @@
 		<div class="flex items-center text-xs">
 			<div class="relative w-14 h-14 mx-auto">
 				<svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-					<circle cx="50" cy="50" r="45" stroke="#e5e7eb" stroke-width="10" fill="none" />
+					<circle cx="50" cy="50" r="45" class="stroke-zinc-300" stroke-width="10" fill="none" />
 					<circle
 						cx="50"
 						cy="50"
