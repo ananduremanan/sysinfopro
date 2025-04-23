@@ -62,7 +62,12 @@
 					<RamStats />
 				</div>
 				<div class="text-sm">
-					<p>CPU Model: <span class="font-bold">{systemInfo.cpu_model}</span></p>
+					<p>
+						CPU Model: <span
+							class="font-bold inline-block truncate max-w-[250px] align-bottom"
+							title={systemInfo.cpu_model}>{systemInfo.cpu_model}</span
+						>
+					</p>
 					<p>Vendor: <span class="font-bold">{systemInfo.cpu_vendor}</span></p>
 					<p>Total Cores: <span class="font-bold">{systemInfo.cpu_cores} Cores</span></p>
 					<p>
