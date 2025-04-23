@@ -48,6 +48,11 @@
 						<div class="text-xs">
 							{systemInfo.host_platform} - {systemInfo.host_platform_version}
 						</div>
+					{:else if systemInfo.host_os == 'darwin'}
+						<img src="/mac.png" alt="macos" class="w-40 h-40" />
+						<div class="text-xs">
+							{systemInfo.host_platform} - {systemInfo.host_platform_version}
+						</div>
 					{/if}
 				</div>
 			</div>
