@@ -2,6 +2,7 @@ package functions
 
 import (
 	"fmt"
+	"os/user"
 	"strings"
 
 	// "github.com/shirou/gopsutil/host"
@@ -35,12 +36,11 @@ func GetSystemInfo() (*SystemInfo, error) {
 	info.PlatformVersion = hostInfo.PlatformVersion
 
 	// User
-	users, err := host.Users()
-	if err != nil || len(users) == 0 {
+	u, err := user.Current()
+	if err != nil {
 		info.LoggedInUser = "unknown"
-	} else {
-		info.LoggedInUser = users[0].User
 	}
+	info.LoggedInUser = u.Username
 
 	// RAM
 	vmStat, err := mem.VirtualMemory()

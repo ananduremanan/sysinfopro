@@ -12,7 +12,7 @@
 		<div class="bg-zinc-200 m-10 md:w-[80vh] rounded-xl dark:bg-zinc-800 dark:text-white">
 			{#if showClose}
 				<button class="float-right p-2 text-xs cursor-pointer" onclick={() => (showModal = false)}
-					>Close[x]</button
+					>Close</button
 				>
 			{/if}
 			<div class="p-4 mt-2">{@render children()}</div>

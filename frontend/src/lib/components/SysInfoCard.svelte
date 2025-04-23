@@ -72,9 +72,10 @@
 					<p>Total Disk Space: <span class="font-bold">{systemInfo.total_disk_gb} GB</span></p>
 					<p>Available Disk Space: <span class="font-bold">{systemInfo.free_disk_gb} GB</span></p>
 					<p>Network Status: <span class="font-bold">{systemInfo.network_status}</span></p>
+					<p>Logged In User: <span class="font-bold">{systemInfo.logged_in_user}</span></p>
 				</div>
 
-				<div class="text-xs self-end mt-6">
+				<div class="text-xs self-end mt-2">
 					<button
 						class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
 						onclick={copyStatHandler}>Copy Stat</button
@@ -85,9 +86,9 @@
 					>
 					{#if logMessage}
 						{#if logMessage === 'Stats copied to clipboard!'}
-							<div class="text-xs mt-2 absolute text-green-500">{logMessage}</div>
+							<div class="text-xs mt-1 absolute text-green-500">{logMessage}</div>
 						{:else}
-							<div class="text-red-500 mt-2 absolute">{logMessage}</div>
+							<div class="text-red-500 mt-1 absolute">{logMessage}</div>
 						{/if}
 					{/if}
 				</div>
