@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { checkInternetConnection } from '$lib';
 	import { GetInterNetSpeed } from '$lib/wailsjs/go/main/App';
 	import { onDestroy } from 'svelte';
 
@@ -9,6 +10,22 @@
 	let progress = $state(0);
 	let phase = $state('idle');
 	let speedTestResult: any = $state(undefined);
+
+	let logMessage = $state<string | undefined>(undefined);
+
+	async function getInternetSpeed() {
+		const isConnected = await checkInternetConnection();
+
+		if (!isConnected) {
+			logMessage = 'No internet connection detected!';
+			setTimeout(() => {
+				logMessage = undefined;
+			}, 2000);
+			return false;
+		}
+
+		return true;
+	}
 
 	// Configuration for the animation
 	let animationConfig = $state({
@@ -25,7 +42,11 @@
 	});
 
 	// Start the speed test animation
-	function startTest() {
+	async function startTest() {
+		const isConnected = await getInternetSpeed();
+
+		if (!isConnected) return;
+
 		if (isRunning) return;
 
 		isRunning = true;
@@ -192,18 +213,20 @@
 
 				<!-- Speed labels -->
 				<div class="absolute text-xs text-gray-600" style="left: 15%; top: 70%;">0</div>
-				<div class="absolute text-xs text-gray-600" style="left: 25%; top: 30%;">25</div>
+				<div class="absolute text-xs text-gray-600" style="left: 25%; top: 30%;">
+					{phase === 'upload' ? '15' : '25'}
+				</div>
 				<div
 					class="absolute text-xs text-gray-600"
 					style="left: 50%; top: 15%; transform: translateX(-50%);"
 				>
-					{phase === 'upload' ? '50' : '50'}
+					{phase === 'upload' ? '20' : '50'}
 				</div>
 				<div class="absolute text-xs text-gray-600" style="right: 25%; top: 30%;">
-					{phase === 'upload' ? '75' : '75'}
+					{phase === 'upload' ? '35' : '75'}
 				</div>
 				<div class="absolute text-xs text-gray-600" style="right: 15%; top: 70%;">
-					{phase === 'upload' ? '100' : '100'}
+					{phase === 'upload' ? '50' : '100'}
 				</div>
 
 				<!-- Speed needle -->
@@ -270,6 +293,7 @@
 					</button>
 				{/if}
 			</div>
+			<div class="text-xs text-red-500">{logMessage}</div>
 		</div>
 	</div>
 {/if}
