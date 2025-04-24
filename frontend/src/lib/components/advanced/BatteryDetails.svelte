@@ -1,32 +1,8 @@
 <script lang="ts">
-	import { GetBatteryDetails } from '$lib/wailsjs/go/main/App';
 	import Card from '../ui/Card.svelte';
 	import RefreshButton from '../ui/RefreshButton.svelte';
 
-	let batteryDetails: any = $state(undefined);
-	let isLoadingBattery = $state(false);
-
-	async function getBatteryDetials() {
-		try {
-			isLoadingBattery = true;
-			const battery = await GetBatteryDetails();
-			if (battery) {
-				batteryDetails = JSON.parse(battery);
-			} else {
-				batteryDetails = null;
-			}
-		} catch (error) {
-			console.error('Failed to get battery details:', error);
-		} finally {
-			setTimeout(() => {
-				isLoadingBattery = false;
-			}, 500);
-		}
-	}
-
-	$effect(() => {
-		getBatteryDetials();
-	});
+	let { isLoadingBattery, batteryDetails, getBatteryDetials } = $props();
 </script>
 
 <Card isLoading={isLoadingBattery}>
@@ -53,7 +29,7 @@
 								>
 							</p>
 							<p>
-								Designed Capacity : <span class="font-bold"
+								Current Capacity : <span class="font-bold"
 									>{batteryDetails.current_capacity} mWh</span
 								>
 							</p>

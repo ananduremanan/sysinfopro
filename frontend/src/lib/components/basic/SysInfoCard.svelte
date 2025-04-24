@@ -37,16 +37,16 @@
 >
 	{#if showSpeedTest}
 		<div>
-			<button class="float-right -mt-2 cursor-pointer" onclick={getInternetSpeed}>Back</button>
+			<!-- <button class="float-right -mt-2 cursor-pointer" onclick={getInternetSpeed}>Back</button> -->
 			<SpeedAnimation />
 		</div>
-	{:else if showAdvancedDashboard}
+	{:else if showAdvancedDashboard && systemInfo}
 		<div>
-			<button
+			<!-- <button
 				class="float-right -mt-2 cursor-pointer"
 				onclick={() => (showAdvancedDashboard = !showAdvancedDashboard)}>Back</button
-			>
-			<AdvancedDash />
+			> -->
+			<AdvancedDash {systemInfo} />
 		</div>
 	{:else}
 		<div class="grid grid-cols-2 items-center">

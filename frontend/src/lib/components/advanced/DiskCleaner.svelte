@@ -75,7 +75,7 @@
 			</div>
 		{:else if files}
 			<div
-				class="mt-4 dark:bg-slate-700 bg-slate-200 border border-slate-300 dark:border-slate-600 w-full rounded-2xl p-2"
+				class="mt-4 dark:bg-slate-700 bg-slate-200 border border-slate-300 dark:border-slate-600 w-full rounded-2xl p-3"
 			>
 				<PieDisk {files} />
 			</div>

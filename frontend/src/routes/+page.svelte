@@ -14,6 +14,14 @@
 	let showQuitConfirm = $state(false);
 	let isLoading = $state(false);
 
+	function toggleBack() {
+		if (showSpeedTest) {
+			showSpeedTest = false;
+		} else if (showAdvancedDashboard) {
+			showAdvancedDashboard = false;
+		}
+	}
+
 	function toggleQuitModal() {
 		showQuitConfirm = !showQuitConfirm;
 	}
@@ -60,6 +68,12 @@
 				<div class="flex space-x-6 items-center">
 					{#if !showSpeedTest && !showAdvancedDashboard}
 						<RefreshButton onclick={getSysInfo} />
+					{/if}
+
+					{#if showAdvancedDashboard || showSpeedTest}
+						<button class="dark:text-slate-400 cursor-pointer text-sm mr-4" onclick={toggleBack}
+							>Back</button
+						>
 					{/if}
 					<button class="dark:text-slate-400 cursor-pointer text-sm mr-2" onclick={toggleQuitModal}
 						>Close</button
