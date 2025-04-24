@@ -71,3 +71,50 @@ func (a *App) GetMemoryStats() (*functions.MemoryStats, error) {
 func (a *App) CheckInternetConnection() bool {
 	return functions.IsConnectedToInternet()
 }
+
+func (a *App) GetBatteryDetails() (string, error) {
+	batteryDetails, err := functions.GetBatteryDetails()
+	if err != nil {
+		return "Error Occured", fmt.Errorf("error gathering battery details: %w", err)
+	}
+
+	jsonBytes, err := json.MarshalIndent(batteryDetails, "", "  ")
+	if err != nil {
+		return "Error Occured", fmt.Errorf("error marshalling JSON: %w", err)
+	}
+
+	return string(jsonBytes), nil
+}
+
+func (a *App) ScanCleanableFiles() (functions.CleanerResult, error) {
+	result := functions.GetCleanableFiles()
+	return result, nil
+}
+
+// ScanSafeCleanableFiles scans only user directories (no admin required)
+func (a *App) ScanSafeCleanableFiles() (functions.CleanerResult, error) {
+	result := functions.SafeClean()
+	return result, nil
+}
+
+// CleanSelectedFiles cleans the selected files and returns results
+func (a *App) CleanSelectedFiles(files []functions.FileInfo) map[string]interface{} {
+	count, size, failures := functions.CleanFiles(files)
+
+	return map[string]interface{}{
+		"cleanedCount":  count,
+		"cleanedSize":   size,
+		"formattedSize": functions.GetFormattedSize(size),
+		"failures":      failures,
+	}
+}
+
+// CheckCleanerPermissions checks if we have elevated permissions
+func (a *App) CheckCleanerPermissions() functions.PermissionStatus {
+	return functions.CheckPermissions() 
+}
+
+// GetFormattedSize returns a human-readable size
+func (a *App) GetFormattedSize(size int64) string {
+	return functions.GetFormattedSize(size)
+}

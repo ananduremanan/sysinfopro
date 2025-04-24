@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Modal from '$lib/components/Modal.svelte';
+	import Modal from './Modal.svelte';
 	import { BrowserOpenURL } from '$lib/wailsjs/runtime/runtime';
 
 	let showModal = $state(false);

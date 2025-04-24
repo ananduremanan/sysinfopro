@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GetCPUStats } from '../wailsjs/go/main/App';
+	import { GetCPUStats } from '../../wailsjs/go/main/App';
 
 	// Define the structure of CPU stats data
 	interface CPUStats {

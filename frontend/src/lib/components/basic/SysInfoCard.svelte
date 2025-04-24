@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { checkInternetConnection, copyStat, mbToGb } from '$lib';
+	import AdvancedDash from '../advanced/AdvancedDash.svelte';
 	import CpuStats from './CpuStats.svelte';
 	import RamStats from './RamStats.svelte';
 	import SpeedAnimation from './SpeedAnimation.svelte';
 
-	let { systemInfo, showSpeedTest = $bindable() } = $props();
+	let { systemInfo, showSpeedTest = $bindable(), showAdvancedDashboard = $bindable() } = $props();
 
 	let logMessage = $state<string | undefined>(undefined);
 
@@ -38,6 +39,14 @@
 		<div>
 			<button class="float-right -mt-2 cursor-pointer" onclick={getInternetSpeed}>Back</button>
 			<SpeedAnimation />
+		</div>
+	{:else if showAdvancedDashboard}
+		<div>
+			<button
+				class="float-right -mt-2 cursor-pointer"
+				onclick={() => (showAdvancedDashboard = !showAdvancedDashboard)}>Back</button
+			>
+			<AdvancedDash />
 		</div>
 	{:else}
 		<div class="grid grid-cols-2 items-center">
@@ -88,6 +97,12 @@
 					<button
 						class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
 						onclick={getInternetSpeed}>Check Internet Speed</button
+					>
+					<button
+						class="dark:bg-zinc-700 bg-zinc-300 p-2 cursor-pointer rounded-md"
+						onclick={() => (showAdvancedDashboard = !showAdvancedDashboard)}
+					>
+						Advanced Metrics</button
 					>
 					{#if logMessage}
 						{#if logMessage === 'Stats copied to clipboard!'}

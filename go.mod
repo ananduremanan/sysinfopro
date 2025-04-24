@@ -5,6 +5,7 @@ go 1.23
 toolchain go1.23.0
 
 require (
+	github.com/distatus/battery v0.11.0
 	github.com/shirou/gopsutil/v4 v4.25.3
 	github.com/wailsapp/wails/v2 v2.9.2
 )
@@ -43,6 +44,7 @@ require (
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.15.0 // indirect
+	howett.net/plist v1.0.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.9.2 => C:\Users\40412\go\pkg\mod
