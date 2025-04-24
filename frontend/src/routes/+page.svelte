@@ -92,11 +92,8 @@
 			<div class="flex flex-col justify-center items-center text-sm gap-2">
 				<div>Are You Sure to Quit?</div>
 				<div class="flex gap-2 mt-2">
-					<button
-						class="px-2 dark:bg-slate-600 rounded border border-red-500 cursor-pointer"
-						onclick={Quit}>Yes</button
-					>
-					<button class="border px-2 rounded cursor-pointer" onclick={toggleQuitModal}>No</button>
+					<button class="px-2 py-1 bg-red-500 rounded-lg text-white cursor-pointer" onclick={Quit}>Yes</button>
+					<button class="px-2 py-1 border border-slate-400 rounded-lg cursor-pointer" onclick={toggleQuitModal}>No</button>
 				</div>
 			</div>
 		</Modal>
