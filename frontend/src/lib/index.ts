@@ -13,6 +13,10 @@ export function mbToGb(mb: number) {
 	return (mb / 1024).toFixed(2);
 }
 
+export function bytesToGb(kb: number) {
+	return (kb / 1024 / 1024 / 1024).toFixed(2);
+}
+
 export async function copyStat(systemInfo: any): Promise<string> {
 	const stats = JSON.stringify(systemInfo, null, 2);
 

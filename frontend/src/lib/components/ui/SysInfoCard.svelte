@@ -2,8 +2,8 @@
 	import { checkInternetConnection, copyStat, mbToGb } from '$lib';
 	import { GetBatteryDetails } from '$lib/wailsjs/go/main/App';
 	import CpuStats from '../basic/CpuStats.svelte';
-	import RamStats from './RamStats.svelte';
-	import SpeedAnimation from './SpeedAnimation.svelte';
+	import RamStats from '../basic/RamStats.svelte';
+	import SpeedAnimation from '../basic/SpeedAnimation.svelte';
 
 	let { systemInfo, showSpeedTest = $bindable() } = $props();
 

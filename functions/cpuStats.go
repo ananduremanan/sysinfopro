@@ -20,7 +20,7 @@ func GetCPUStats() (*CPUStats, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Just get the overall CPU usage (not per core)
 	return &CPUStats{
 		Usage:     percentages[0],
@@ -32,10 +32,10 @@ func GetCPUStats() (*CPUStats, error) {
 // Context is passed from the main App
 func StartCPUMonitoring(ctx context.Context) {
 	ticker := time.NewTicker(2 * time.Second)
-	
+
 	go func() {
 		defer ticker.Stop()
-		
+
 		for range ticker.C {
 			stats, err := GetCPUStats()
 			if err == nil {
