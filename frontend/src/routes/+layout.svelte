@@ -5,12 +5,17 @@
 
 	let { children } = $props();
 
+	const downloadUrl =
+		'https://github.com/ananduremanan/sysinfopro/releases/download';
+
 	let showUpdate = $state(false);
+	let versionName = $state('');
 
 	async function checkUpdate() {
 		try {
 			const result = await CheckUpdate();
 			if (result) {
+				console.log(result);
 				showUpdate = JSON.parse(result).is_update_available;
 			}
 		} catch (error) {
@@ -31,8 +36,8 @@
 			<div class="font-bold">Updates Available</div>
 			<div>A New Version of SysInfoPro is Available</div>
 			<div class="mt-2">
-				<button class="px-2 py-1 bg-green-500 rounded-lg text-white cursor-pointer"
-					>Download Now</button
+				<button class="px-2 py-1 bg-green-500 rounded-lg text-white cursor-pointer">
+					<a href={`${downloadUrl}/${versionName}/sysinfopro.exe`}>Download Now</a></button
 				>
 				<button
 					class="px-2 py-1 border border-green-500 rounded-lg cursor-pointer"

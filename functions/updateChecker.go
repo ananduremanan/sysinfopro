@@ -4,12 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 )
 
-type Config struct {
-	CurrentTag string `json:"current_tag"`
-}
+const CurrentTag = "v-beta-4"
 
 // Updating the Tag struct to match the actual GitHub API response
 type Tag struct {
@@ -35,17 +32,6 @@ func CheckUpdate() (*UpdateStatus, error) {
 		IsUpdateAvailable: false,
 	}
 
-	file, err := os.Open("config.json")
-	if err != nil {
-		return nil, fmt.Errorf("error opening config file: %v", err)
-	}
-	defer file.Close()
-
-	var config Config
-	if err := json.NewDecoder(file).Decode(&config); err != nil {
-		return nil, fmt.Errorf("error decoding config: %v", err)
-	}
-
 	// Fetch tags from GitHub
 	url := "https://api.github.com/repos/ananduremanan/sysinfopro/tags"
 	resp, err := http.Get(url)
@@ -68,7 +54,7 @@ func CheckUpdate() (*UpdateStatus, error) {
 	latestTag := tags[0].Name
 
 	// Compare with current tag
-	if latestTag != config.CurrentTag {
+	if latestTag != CurrentTag {
 		updateStatus.IsUpdateAvailable = true
 		updateStatus.NewTag = latestTag
 	}
