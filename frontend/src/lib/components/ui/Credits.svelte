@@ -39,7 +39,7 @@
 					you're a developer, IT professional, or just a curious user, SysInfo Pro provides
 					real-time data in a clean, readable format — with zero bloat.
 
-					<div class="mt-4">Sysinfo Pro Version 0.1 © 2025 - Present</div>
+					<div class="mt-4">Sysinfo Pro beta version 5 © 2025 - Present</div>
 					<div class="mt-1">www.sysinfopro.in</div>
 				</div>
 			{:else if modalTitle === 'Credits'}

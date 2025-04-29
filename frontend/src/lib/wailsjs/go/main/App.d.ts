@@ -6,6 +6,8 @@ export function CheckCleanerPermissions():Promise<functions.PermissionStatus>;
 
 export function CheckInternetConnection():Promise<boolean>;
 
+export function CheckUpdate():Promise<string>;
+
 export function CleanSelectedFiles(arg1:Array<functions.FileInfo>):Promise<{[key: string]: any}>;
 
 export function GetBatteryDetails():Promise<string>;

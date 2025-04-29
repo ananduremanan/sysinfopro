@@ -10,6 +10,10 @@ export function CheckInternetConnection() {
   return window['go']['main']['App']['CheckInternetConnection']();
 }
 
+export function CheckUpdate() {
+  return window['go']['main']['App']['CheckUpdate']();
+}
+
 export function CleanSelectedFiles(arg1) {
   return window['go']['main']['App']['CleanSelectedFiles'](arg1);
 }

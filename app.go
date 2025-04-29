@@ -111,10 +111,26 @@ func (a *App) CleanSelectedFiles(files []functions.FileInfo) map[string]interfac
 
 // CheckCleanerPermissions checks if we have elevated permissions
 func (a *App) CheckCleanerPermissions() functions.PermissionStatus {
-	return functions.CheckPermissions() 
+	return functions.CheckPermissions()
 }
 
 // GetFormattedSize returns a human-readable size
 func (a *App) GetFormattedSize(size int64) string {
 	return functions.GetFormattedSize(size)
+}
+
+// CheckUpdate checks for updates
+func (a *App) CheckUpdate() (string, error) {
+	updateStatus, err := functions.CheckUpdate()
+
+	if err != nil {
+		return "Error Occured", fmt.Errorf("error checking for update: %w", err)
+	}
+
+	jsonBytes, err := json.MarshalIndent(updateStatus, "", "  ")
+	if err != nil {
+		return "Error Occured", fmt.Errorf("error marshalling JSON: %w", err)
+	}
+
+	return string(jsonBytes), nil
 }
