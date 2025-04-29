@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import { CheckUpdate } from '$lib/wailsjs/go/main/App';
+	import { BrowserOpenURL } from '$lib/wailsjs/runtime/runtime';
 	import '../app.css';
 
 	let { children } = $props();
 
-	const downloadUrl =
-		'https://github.com/ananduremanan/sysinfopro/releases/download';
+	const url =
+		'https://github.com/ananduremanan/sysinfopro/releases/download/v-beta-5/sysinfopro.exe';
 
 	let showUpdate = $state(false);
 	let versionName = $state('');
@@ -36,8 +37,13 @@
 			<div class="font-bold">Updates Available</div>
 			<div>A New Version of SysInfoPro is Available</div>
 			<div class="mt-2">
-				<button class="px-2 py-1 bg-green-500 rounded-lg text-white cursor-pointer">
-					<a href={`${downloadUrl}/${versionName}/sysinfopro.exe`}>Download Now</a></button
+				<button
+					class="px-2 py-1 bg-green-500 rounded-lg text-white cursor-pointer"
+					onclick={() => {
+						BrowserOpenURL('https://sysinfopro.netlify.app');
+					}}
+				>
+					Download Now</button
 				>
 				<button
 					class="px-2 py-1 border border-green-500 rounded-lg cursor-pointer"
