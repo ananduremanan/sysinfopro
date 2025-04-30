@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const CurrentTag = "v-beta-4"
+const CurrentTag = "v1.0.0"
 
 // Updating the Tag struct to match the actual GitHub API response
 type Tag struct {
