@@ -10,8 +10,16 @@
 		<div class="flex justify-center gap-2 items-center h-full">
 			<div class="flex-1">
 				<div class="font-bold mb-2">System Health Score</div>
-				<div class="text-2xl font-bold text-green-500">{overallScore}</div>
-				<p class="text-xs text-gray-400">Based on Battery Capacity, Available Disk Space and Installed Memory.</p>
+				<div class="text-2xl font-bold text-green-500">
+					{#if Number.isFinite(overallScore)}
+						{overallScore}
+					{:else}
+						<span class="text-xl">Not Available</span>
+					{/if}
+				</div>
+				<p class="text-xs text-gray-400">
+					Based on Battery Capacity, Available Disk Space and Installed Memory.
+				</p>
 			</div>
 			<img src="/pc.png" alt="battery" class="w-24 h-24" />
 		</div>
