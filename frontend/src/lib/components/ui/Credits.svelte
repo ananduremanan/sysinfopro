@@ -4,6 +4,8 @@
 
 	let showModal = $state(false);
 	let modalTitle: string | undefined = $state(undefined);
+	let today = new Date();
+	let year = today.getFullYear();
 
 	function setModal(title = '') {
 		modalTitle = title;
@@ -38,9 +40,18 @@
 					instant insights into your machine's performance and hardware configuration. Whether
 					you're a developer, IT professional, or just a curious user, SysInfo Pro provides
 					real-time data in a clean, readable format — with zero bloat.
+					<div class="flex flex-col items-start space-x-2 mt-2">
+						<div>Bug Report URL:</div>
+						<button
+							class="text-blue-500 hover:text-blue-700 cursor-pointer"
+							onclick={() => {
+								BrowserOpenURL('https://github.com/ananduremanan/sysinfopro/issues');
+							}}>https://github.com/ananduremanan/sysinfopro/issues</button
+						>
+					</div>
 
-					<div class="mt-4">Sysinfo Pro beta version 5 © 2025 - Present</div>
-					<div class="mt-1">www.sysinfopro.in</div>
+					<div class="mt-4">Sysinfo Pro © {year} - Present</div>
+					<div class="mt-1">sysinfopro.netlify.app</div>
 				</div>
 			{:else if modalTitle === 'Credits'}
 				<div class="flex justify-between items-center">
