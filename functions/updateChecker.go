@@ -8,7 +8,6 @@ import (
 
 const CurrentTag = "v1.0.0"
 
-// Updating the Tag struct to match the actual GitHub API response
 type Tag struct {
 	Name       string `json:"name"`
 	ZipballURL string `json:"zipball_url"`
@@ -30,9 +29,9 @@ type UpdateStatus struct {
 func CheckUpdate() (*UpdateStatus, error) {
 	updateStatus := &UpdateStatus{
 		IsUpdateAvailable: false,
+		NewTag:            "",
 	}
 
-	// Fetch tags from GitHub
 	url := "https://api.github.com/repos/ananduremanan/sysinfopro/tags"
 	resp, err := http.Get(url)
 	if err != nil {
@@ -45,18 +44,22 @@ func CheckUpdate() (*UpdateStatus, error) {
 		return nil, fmt.Errorf("error decoding tags: %v", err)
 	}
 
-	// Check if there are tags available
 	if len(tags) == 0 {
 		return updateStatus, nil
 	}
 
-	// The first tag in the response is the newest one
-	latestTag := tags[0].Name
+	// Check if CurrentTag exists in the list
+	found := false
+	for _, tag := range tags {
+		if tag.Name == CurrentTag {
+			found = true
+			break
+		}
+	}
 
-	// Compare with current tag
-	if latestTag != CurrentTag {
+	if !found {
 		updateStatus.IsUpdateAvailable = true
-		updateStatus.NewTag = latestTag
+		updateStatus.NewTag = "not_found"
 	}
 
 	return updateStatus, nil
